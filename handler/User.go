@@ -41,5 +41,20 @@ func GetUser(c *gin.Context) {
 		} else{
 			c.JSON(200, user)
 		}
+}
 
+func PostUser(c *gin.Context) {
+
+		content := c.PostForm("content")
+
+		if err := db.Create(&model.User{Content: content}).Error; err != nil {
+			c.JSON(404, "Not found")
+		} else{
+
+		c.JSON(201, gin.H{
+			"status": 	"created",
+			"type": 		"user",
+			"content":  content,
+		})
+		}
 }

@@ -9,7 +9,6 @@ type User struct {
 	Content string `json:"content"`
 }
 
-
 func (u *User) TableName() string {
 	return "users"
 }

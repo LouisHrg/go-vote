@@ -21,6 +21,7 @@ func main() {
 	r.GET("/", TestEndpoint)
 	r.GET("/users", handler.GetUsers)
 	r.GET("/users/:id", handler.GetUser)
+	r.POST("/users", handler.PostUser)
 
 	r.Run()
 }
