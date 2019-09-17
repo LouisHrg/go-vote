@@ -13,3 +13,6 @@ install-go-vendor:
 
 start:
 	@ ./go-vote
+
+reset-db:
+	@ rm test.db

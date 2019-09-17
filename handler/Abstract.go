@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-vote/provider"
 	"strconv"
+	"fmt"
 )
 
 const pageDefault string = "1"
@@ -23,9 +24,9 @@ func getAllAbstract(c *gin.Context, objects interface{}) {
 
 func getAbstract(c *gin.Context, object interface{}) {
 
-	id := c.Param("id")
-
-	if err := db.Set("gorm:auto_preload", true).First(object, id).Error; err != nil {
+	uuid := c.Param("uuid")
+	fmt.Println(uuid)
+	if err := db.Set("gorm:auto_preload", true).Where("uuid", uuid).First(&object).Error; err != nil {
 		c.JSON(404, "Not found")
 	} else {
 		c.JSON(200, object)
@@ -33,5 +34,17 @@ func getAbstract(c *gin.Context, object interface{}) {
 }
 
 func postAbstract(c *gin.Context, object interface{}) {
+	if err := db.Create(object).Error; err != nil {
+		c.JSON(500, "Server Error")
+	} else{
+		c.JSON(201, object)
+	}
+}
 
+
+// BasicResponse : homeapge of the api
+func BasicResponse(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"response": "Welcome to go-vote API",
+	})
 }

@@ -3,9 +3,9 @@ package provider
 import (
 	"github.com/jinzhu/gorm"
 	// I don't know this is the way the documentation is
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"github.com/biezhi/gorm-paginator/pagination"
 	"github.com/go-vote/model"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
 var db *gorm.DB
@@ -35,7 +35,7 @@ func init() {
 		Firstname: "Louis",
 		Lastname:  "Harang",
 		Age:       24,
-		Password:  "super-secret"})
+		Password:  "secret"})
 
 }
 

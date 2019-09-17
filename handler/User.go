@@ -23,16 +23,15 @@ func GetUser(c *gin.Context) {
 }
 
 // PostUser : create a new user
-/*func PostUser(c *gin.Context) {
+func PostUser(c *gin.Context) {
 
-		content := c.PostForm("content")
+	email := c.PostForm("email")
+	password := c.PostForm("password")
+	firstname := c.PostForm("firstname")
+	lastname := c.PostForm("lastname")
+	var newUser = model.User{Email: email, Password: password, Firstname: firstname, Lastname: lastname}
 
-		var newUser = model.User{Content: content}
-
-		if err := db.Create(newUser).Error; err != nil {
-			c.JSON(404, "Not found")
-		} else{
-			c.JSON(201, newUser)
-		}
+	postAbstract(c, &newUser)
 }
-*/
+
+

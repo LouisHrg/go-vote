@@ -1,16 +1,15 @@
 package model
 
 import (
-	"github.com/jinzhu/gorm"
 	"github.com/satori/go.uuid"
+	"github.com/jinzhu/gorm"
 )
 
 // Survey : the survey struct definition
 type Survey struct {
-	gorm.Model
-	UUID      string     `gorm:"unique_index"`
-	Question  string     `json:"question"`
-	Responses []Response `gorm:"PRELOAD:true"`
+	Abstract 							`sql:"embedded;prefix:-"`
+	Question  string    	`json:"question"`
+	Responses []Response 	`gorm:"PRELOAD:true"`
 }
 
 // TableName : Gorm
@@ -24,8 +23,9 @@ func (s *Survey) BeforeCreate(scope *gorm.Scope) {
 	return
 }
 
-//AfterFind : Gorm hook
+// AfterFind : Gorm hook
 func (s *Survey) AfterFind() (err error) {
 	s.ID = 0
 	return
 }
+
