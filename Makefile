@@ -16,3 +16,6 @@ start:
 
 reset-db:
 	@ rm test.db
+
+deploy-dev:
+	@ git push heroku master

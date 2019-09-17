@@ -18,3 +18,5 @@ tmp/
 .env
 
 node_modules/
+
+gin.log
