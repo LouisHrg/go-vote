@@ -1,60 +1,38 @@
 package handler
 
 import (
-	"github.com/go-vote/model"
-	"github.com/go-vote/provider"
-	"github.com/biezhi/gorm-paginator/pagination"
-	"strconv"
 	"github.com/gin-gonic/gin"
+	"github.com/go-vote/model"
 )
 
-
-var db = provider.GetDB()
-
+// GetUsers : fetch all the users from the database
 func GetUsers(c *gin.Context) {
 
-		var users []model.User
+	var users []model.User
 
-		page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
-		limit, _ := strconv.Atoi(c.DefaultQuery("limit", "3"))
+	getAllAbstract(c, &users)
 
-
-		paginator := pagination.Paging(&pagination.Param{
-		    DB:      db,
-		    Page:    page,
-		    Limit:   limit,
-		    OrderBy: []string{"id desc"},
-		    ShowSQL: false,
-		}, &users)
-
-		c.JSON(200, paginator)
 }
 
+// GetUser : fetch one user by his id
 func GetUser(c *gin.Context) {
 
-		var user model.User
+	var user model.User
 
-		id := c.Param("id")
-
-		if err := db.First(&user, id).Error; err != nil {
-			c.JSON(404, "Not found")
-		} else{
-			c.JSON(200, user)
-		}
+	getAbstract(c, &user)
 }
 
-func PostUser(c *gin.Context) {
+// PostUser : create a new user
+/*func PostUser(c *gin.Context) {
 
 		content := c.PostForm("content")
 
-		if err := db.Create(&model.User{Content: content}).Error; err != nil {
+		var newUser = model.User{Content: content}
+
+		if err := db.Create(newUser).Error; err != nil {
 			c.JSON(404, "Not found")
 		} else{
-
-		c.JSON(201, gin.H{
-			"status": 	"created",
-			"type": 		"user",
-			"content":  content,
-		})
+			c.JSON(201, newUser)
 		}
 }
+*/
