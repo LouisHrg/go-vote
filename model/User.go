@@ -4,6 +4,7 @@ import (
 	"github.com/jinzhu/gorm"
 	"github.com/satori/go.uuid"
 	"golang.org/x/crypto/bcrypt"
+	"time"
 )
 
 // User : the user struct definition
@@ -12,7 +13,8 @@ type User struct {
 	Email     string 			`gorm:"type:varchar(100);unique_index"json:"email"`
 	Firstname string 			`json:"firstname"`
 	Lastname  string 			`json:"lastname"`
-	Age       int    			`json:"age"`
+	Accesslevel       int    			`json:"accesslevel"`
+	Dateofbirth time.Time    			`json:"dateofbirth"`
 	Password  string 			`json:"-"`
 }
 

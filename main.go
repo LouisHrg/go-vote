@@ -43,7 +43,7 @@ func main() {
 
 	r.POST("/login", authware.LoginHandler)
 
-  r.GET("/", handler.BasicResponse)
+  	r.GET("/", handler.BasicResponse)
 	r.GET("/users", handler.GetUsers)
 	r.GET("/users/:uuid", handler.GetUser)
 	r.POST("/users", handler.PostUser)

@@ -6,6 +6,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"github.com/biezhi/gorm-paginator/pagination"
 	"github.com/go-vote/model"
+	"time"
 )
 
 var db *gorm.DB
@@ -30,11 +31,16 @@ func init() {
 	db.Create(&model.Response{Survey: *newSurvey, Message: "Eclatax javax"})
 	db.Create(&model.Response{Survey: *newSurvey, Message: "Mdrlolptdr .net"})
 
+	input := "1996-02-08"
+	layout := "2006-01-02"
+	t, _ := time.Parse(layout, input)
+
 	db.Create(&model.User{
-		Email:     "vundaboy@gmail.com",
-		Firstname: "Louis",
-		Lastname:  "Harang",
-		Age:       24,
+		Email:     "audricmati@gmail.com",
+		Firstname: "Audric",
+		Lastname:  "Mati",
+		Accesslevel:       1,
+		Dateofbirth:	t,
 		Password:  "secret"})
 
 }
