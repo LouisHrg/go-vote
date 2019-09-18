@@ -10,7 +10,7 @@ func GetSurveys(c *gin.Context) {
 
 	var surveys []model.Survey
 
-	getAllAbstract(c, &surveys)
+	getAll(c, &surveys)
 
 }
 
@@ -19,5 +19,5 @@ func GetSurvey(c *gin.Context) {
 
 	var survey model.Survey
 
-	getAbstract(c, &survey)
+	get(c, &survey)
 }

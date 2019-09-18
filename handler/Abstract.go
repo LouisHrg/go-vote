@@ -11,7 +11,8 @@ const limitDefault string = "10"
 
 var db = provider.GetDB()
 
-func getAllAbstract(c *gin.Context, objects interface{}) {
+// getAll : Take an array of object and respond all the ressource requested paginated
+func getAll(c *gin.Context, objects interface{}) {
 
 	page, _ := strconv.Atoi(c.DefaultQuery("page", pageDefault))
 	limit, _ := strconv.Atoi(c.DefaultQuery("limit", limitDefault))
@@ -21,7 +22,8 @@ func getAllAbstract(c *gin.Context, objects interface{}) {
 	c.JSON(200, usersCol)
 }
 
-func getAbstract(c *gin.Context, object interface{}) {
+// get : Take an object an a gin context and respond the ressource with uuid requested in route
+func get(c *gin.Context, object interface{}) {
 
 	uuid := c.Param("uuid")
 
@@ -38,7 +40,8 @@ func getAbstract(c *gin.Context, object interface{}) {
 	}
 }
 
-func postAbstract(c *gin.Context, object interface{}) {
+// post
+func post(c *gin.Context, object interface{}) {
 
 	c.ShouldBindJSON(&object)
 
