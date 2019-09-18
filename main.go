@@ -9,8 +9,6 @@ import (
 
 	"github.com/go-vote/middleware"
 	"github.com/go-vote/handler"
-
-
 )
 
 
@@ -27,7 +25,6 @@ func main() {
 
 	gin.DisableConsoleColor()
 
-	// Logging to a file.
 	f, _ := os.Create("gin.log")
 	gin.DefaultWriter = io.MultiWriter(f)
 

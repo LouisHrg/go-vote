@@ -1,9 +1,9 @@
 # Awesome golang api
 
 Developers :
-- [MATI Audric](github.com/odrik)
-- [VARVEROPOULOS Valentin](github.com/firenaik)
-- [HARANG Louis](github.com/louishrg)
+- [MATI Audric](https://github.com/odrik)
+- [VARVEROPOULOS Valentin](https://github.com/firenaik)
+- [HARANG Louis](https://github.com/louishrg)
 
 ## Requirements :
 
@@ -30,3 +30,14 @@ Simply start a builded version of the project :
 You can run static analysis of the base code with :
 
 ```make analysis```
+
+## Dependencies :
+
+-  [gabs](github.com/Jeffail/gabs)
+-  [gin-jwt](github.com/appleboy/gin-jwt/v2)
+-  [govalidator](github.com/asaskevich/govalidator)
+-  [pagination](github.com/biezhi/gorm-paginator/pagination)
+-  [gin](github.com/gin-gonic/gin)
+-  [gorm](github.com/jinzhu/gorm)
+-  [go.uuid](github.com/satori/go.uuid)
+-  [crypto](golang.org/x/crypto)
