@@ -1,14 +1,13 @@
 # Awesome golang api
 
-Created by :
-- MATI Audric
-- VARVEROPOULOS Valentin
-- HARANG Louis
+Developers :
+- [MATI Audric](github.com/odrik)
+- [VARVEROPOULOS Valentin](github.com/firenaik)
+- [HARANG Louis](github.com/louishrg)
 
 ## Requirements :
 
 go 1.13
-docker
 
 ## Run the project
 
