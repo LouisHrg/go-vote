@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-vote/provider"
 	"strconv"
-	"fmt"
 )
 
 const pageDefault string = "1"
@@ -25,19 +24,36 @@ func getAllAbstract(c *gin.Context, objects interface{}) {
 func getAbstract(c *gin.Context, object interface{}) {
 
 	uuid := c.Param("uuid")
-	fmt.Println(uuid)
-	if err := db.Set("gorm:auto_preload", true).Where("uuid", uuid).First(&object).Error; err != nil {
-		c.JSON(404, "Not found")
+
+	if err := db.Set("gorm:auto_preload", true).Where("uuid = ?", uuid).First(object).Error; err != nil {
+		c.JSON(404, gin.H{
+			"code": 404,
+			"message": "Ressource not found",
+		})
 	} else {
-		c.JSON(200, object)
+		c.JSON(200, gin.H{
+			"code": 200,
+			"data": object,
+		})
 	}
 }
 
 func postAbstract(c *gin.Context, object interface{}) {
+
+	c.ShouldBindJSON(&object)
+
 	if err := db.Create(object).Error; err != nil {
-		c.JSON(500, "Server Error")
+		c.SecureJSON(400, gin.H{
+			"code": 400,
+			"message": "Bad request",
+			"errors": err,
+		})
 	} else{
-		c.JSON(201, object)
+		c.JSON(201, gin.H{
+			"code": 201,
+			"message": "Ressource created",
+			"data": object,
+		})
 	}
 }
 
@@ -45,6 +61,7 @@ func postAbstract(c *gin.Context, object interface{}) {
 // BasicResponse : homeapge of the api
 func BasicResponse(c *gin.Context) {
 	c.JSON(200, gin.H{
-		"response": "Welcome to go-vote API",
+		"code": 200,
+		"message": "Success",
 	})
 }

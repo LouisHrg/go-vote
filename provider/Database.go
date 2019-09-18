@@ -2,6 +2,7 @@ package provider
 
 import (
 	"github.com/jinzhu/gorm"
+	"github.com/qor/validations"
 	// I don't know this is the way the documentation is
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"github.com/biezhi/gorm-paginator/pagination"
@@ -22,20 +23,29 @@ func init() {
 
 	db.LogMode(true)
 
+	validations.RegisterCallbacks(db)
+
 	db.AutoMigrate(&model.User{}, &model.Survey{}, &model.Response{})
 
 	var newSurvey = &model.Survey{Question: "Plutot java ou .net ?"}
 
 	db.Create(&newSurvey)
 	db.Create(&model.Response{Survey: *newSurvey, Message: "Eclatax javax"})
-	db.Create(&model.Response{Survey: *newSurvey, Message: "Mdrlolptdr .net"})
+	db.Create(&model.Response{Survey: *newSurvey, Message: "Eclatax .net"})
 
 	db.Create(&model.User{
-		Email:     "vundaboy@gmail.com",
-		Firstname: "Louis",
-		Lastname:  "Harang",
+		Email:     "admin@admin.com",
+		Firstname: "Jean",
+		Lastname:  "Admin",
 		Age:       24,
-		Password:  "secret"})
+		Password:  "admin"})
+
+	db.Create(&model.User{
+		Email:     "test@test.com",
+		Firstname: "Jean",
+		Lastname:  "Test",
+		Age:       24,
+		Password:  "test"})
 
 }
 

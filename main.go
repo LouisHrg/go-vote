@@ -6,11 +6,10 @@ import (
 	"io"
 
 	"github.com/gin-gonic/gin"
-	//"github.com/go-vote/handler"
-
 
 	"github.com/go-vote/middleware"
 	"github.com/go-vote/handler"
+
 
 )
 
