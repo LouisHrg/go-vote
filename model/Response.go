@@ -9,7 +9,7 @@ import (
 type Response struct {
 	Abstract 					`sql:"embedded;prefix:-"`
 	Message  	string 	`json:"message"`
-	SurveyID 	int
+	SurveyID 	int 		`json:"-"`
 	Survey   	Survey 	`gorm:"PRELOAD:false"json:"-"`
 
 }

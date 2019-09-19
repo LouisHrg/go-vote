@@ -10,7 +10,7 @@ func GetUsers(c *gin.Context) {
 
 	var users []model.User
 
-	getAllAbstract(c, &users)
+	getAll(c, &users)
 
 }
 
@@ -19,19 +19,15 @@ func GetUser(c *gin.Context) {
 
 	var user model.User
 
-	getAbstract(c, &user)
+	get(c, &user)
 }
 
 // PostUser : create a new user
 func PostUser(c *gin.Context) {
 
-	email := c.PostForm("email")
-	password := c.PostForm("password")
-	firstname := c.PostForm("firstname")
-	lastname := c.PostForm("lastname")
-	var newUser = model.User{Email: email, Password: password, Firstname: firstname, Lastname: lastname}
+	var user model.User
 
-	postAbstract(c, &newUser)
+	post(c, &user)
 }
 
 
