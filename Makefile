@@ -1,5 +1,5 @@
 run:
-	@ go build && ./go-vote
+	@ rm test.db && go build && ./go-vote
 
 analysis:
 	@ $$GOPATH/bin/revive handler model provider

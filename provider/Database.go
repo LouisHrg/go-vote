@@ -7,6 +7,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"github.com/biezhi/gorm-paginator/pagination"
 	"github.com/go-vote/model"
+	"time"
 )
 
 var db *gorm.DB
@@ -40,13 +41,17 @@ func init() {
 		Age:       24,
 		Password:  "admin"})
 
+	input := "1996-02-08"
+	layout := "2006-01-02"
+	t, _ := time.Parse(layout, input)
+
 	db.Create(&model.User{
 		Email:     "test@test.com",
-		Firstname: "Jean",
+		Firstname: "Test",
 		Lastname:  "Test",
-		Age:       24,
-		Password:  "test"})
-
+		Accesslevel:       1,
+		Dateofbirth:	t,
+		Password:  "secret"})
 }
 
 // GetDB : getter of the instance of the database
