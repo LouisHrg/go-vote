@@ -1,4 +1,4 @@
-# Awesome golang api
+# Awesome Golang API [Project](https://github.com/ritoon/cours/blob/esgi/project/README.md)
 
 Developers :
 - [MATI Audric](https://github.com/odrik)

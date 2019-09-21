@@ -28,14 +28,27 @@ func init() {
 
 	db.AutoMigrate(&model.User{}, &model.Survey{}, &model.Response{})
 
-	var newSurvey = &model.Survey{Question: "Plutot java ou .net ?"}
+	input := "2018-10-01"
+	layout := "2006-01-02"
+	start, _ := time.Parse(layout, input)
+
+	input = "2020-10-01"
+	layout = "2006-01-02"
+	end, _ := time.Parse(layout, input)
+
+	var newSurvey = &model.Survey{
+		Title: "Propreté des trottoirs",
+		Desc: "Dans le budget qui sera soumis au vote des conseillers de Paris lundi, 32 M€ seront consacrés à l’achat de nouvelles machines, plus silencieuses, plus propres et plus performantes. Il n’y aura pas d’embauche d’agents supplémentaires.",
+		StartDate: start,
+		EndDate: end,
+	}
 
 	db.Create(&newSurvey)
 	db.Create(&model.Response{Survey: *newSurvey, Message: "Eclatax javax"})
 	db.Create(&model.Response{Survey: *newSurvey, Message: "Eclatax .net"})
 
-	input := "1996-02-08"
-	layout := "2006-01-02"
+	input = "1996-02-08"
+	layout = "2006-01-02"
 	t, _ := time.Parse(layout, input)
 	
 	db.Create(&model.User{
