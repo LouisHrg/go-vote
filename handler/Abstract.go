@@ -60,6 +60,48 @@ func post(c *gin.Context, object interface{}) {
 	}
 }
 
+// put
+func put(c *gin.Context, object interface{}) {
+
+	uuid := c.Param("uuid")
+	
+	c.ShouldBindJSON(&object)
+	if err := db.Where("uuid = ?", uuid).First(object).Error; err != nil {
+		c.SecureJSON(400, gin.H{
+			"code": 400,
+			"message": "Bad request",
+			"errors": err,
+		})
+	} else{
+		c.JSON(200, gin.H{
+			"code": 200,
+			"message": "Ressource updated",
+			"data": object,
+		})
+	}
+}
+
+// delete
+func delete(c *gin.Context, object interface{}) {
+
+	uuid := c.Param("uuid")
+	
+	c.ShouldBindJSON(&object)
+	if err := db.Where("uuid = ?", uuid).Delete(object).Error; err != nil {
+		c.SecureJSON(400, gin.H{
+			"code": 400,
+			"message": "Bad request",
+			"errors": err,
+		})
+	} else{
+		c.JSON(200, gin.H{
+			"code": 200,
+			"message": "Ressource deleted",
+			"data": object,
+		})
+	}
+}
+
 
 // BasicResponse : homeapge of the api
 func BasicResponse(c *gin.Context) {
