@@ -43,6 +43,8 @@ func main() {
 	r.GET("/users", handler.GetUsers)
 	r.GET("/users/:uuid", handler.GetUser)
 	r.POST("/users", handler.PostUser)
+	r.PUT("/users/:uuid", handler.PutUser)
+	r.DELETE("/users/:uuid", handler.DeleteUser)
 
 	r.GET("/surveys", handler.GetSurveys)
 	r.GET("/surveys/:uuid", handler.GetSurvey)
