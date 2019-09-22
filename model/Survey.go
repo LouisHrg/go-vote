@@ -3,12 +3,16 @@ package model
 import (
 	"github.com/satori/go.uuid"
 	"github.com/jinzhu/gorm"
+	"time"
 )
 
 // Survey : the survey struct definition
 type Survey struct {
 	Abstract 							`sql:"embedded;prefix:-"`
-	Question  string    	`json:"question"`
+	Title  string    	`json:"title"`
+	Desc  string    	`json:"desc"`
+	StartDate time.Time    			`json:"startDate"`
+	EndDate time.Time    			`json:"endDate"`
 	Responses []Response 	`gorm:"PRELOAD:true"`
 }
 
