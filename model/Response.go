@@ -11,7 +11,7 @@ type Response struct {
 	Message  	string 	`json:"message"`
 	SurveyID 	int 		`json:"-"`
 	Survey   	Survey 	`gorm:"PRELOAD:false"json:"-"`
-
+	Users 		[]*User `gorm:"many2many:respones_users;"`
 }
 
 // TableName : Gorm related
