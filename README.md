@@ -5,7 +5,7 @@ Developers :
 - [VARVEROPOULOS Valentin](https://github.com/firenaik)
 - [HARANG Louis](https://github.com/louishrg)
 
-## Requirements :
+## Requirements
 
 go 1.13
 
@@ -31,7 +31,7 @@ You can run static analysis of the base code with :
 
 ```make analysis```
 
-## Dependencies :
+## Dependencies
 
 -  [gabs](github.com/Jeffail/gabs)
 -  [gin-jwt](github.com/appleboy/gin-jwt/v2)
@@ -41,3 +41,29 @@ You can run static analysis of the base code with :
 -  [gorm](github.com/jinzhu/gorm)
 -  [go.uuid](github.com/satori/go.uuid)
 -  [crypto](golang.org/x/crypto)
+
+## Documentation
+
+### GET /users
+
+### GET /users/:udid
+
+### POST /users
+    {
+        "email": "newuser@esgi.fr",
+        "firstname": "New",
+        "lastname": "User",
+        "accesslevel": 1,
+        "dateofbirth": "1998-01-13T00:00:00Z"
+    }
+
+### DELETE /users/:udid
+
+### PUT /users/:udid
+    {
+        "email": "newuser@esgi.fr",
+        "firstname": "New",
+        "lastname": "User",
+        "accesslevel": 1,
+        "dateofbirth": "1998-01-13T00:00:00Z"
+    }
