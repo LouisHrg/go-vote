@@ -26,7 +26,12 @@ func init() {
 
 	validations.RegisterCallbacks(db)
 
-	db.AutoMigrate(&model.User{}, &model.Survey{}, &model.Response{})
+	db.AutoMigrate(
+		&model.User{},
+	 	&model.Survey{},
+	 	&model.Response{},
+	 	&model.IP{},
+	)
 
 	input := "2018-10-01"
 	layout := "2006-01-02"
@@ -50,7 +55,7 @@ func init() {
 	input = "1996-02-08"
 	layout = "2006-01-02"
 	t, _ := time.Parse(layout, input)
-	
+
 	db.Create(&model.User{
 		Email:     "admin@admin.com",
 		Firstname: "Jean",
@@ -63,7 +68,7 @@ func init() {
 		Email:     "test@test.com",
 		Firstname: "Test",
 		Lastname:  "Test",
-		Accesslevel:       1,
+		Accesslevel:       2,
 		Dateofbirth:	t,
 		Password:  "secret"})
 }
