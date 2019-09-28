@@ -22,10 +22,6 @@ type SignedResponse struct {
 	Jwt   string `json:"token"`
 }
 
-func index(c *gin.Context) {
-	c.JSON(200, gin.H{"msg": "index"})
-}
-
 // LoginHandler : The login handler, set it for a /login route for example
 func LoginHandler(c *gin.Context) {
 
@@ -72,8 +68,13 @@ func LoginHandler(c *gin.Context) {
 		})
 		return
 		}
-
 	}
+
+	var ip model.IP
+	// Update attempts for client IP
+	db.Where(model.IP{Address: c.ClientIP()}).FirstOrInit(&ip, model.IP{Address: c.ClientIP()})
+	ip.Attempt++
+	db.Save(&ip)
 
 	c.JSON(400, UnsignedResponse{
 		Message: "Invalid username or/and password",

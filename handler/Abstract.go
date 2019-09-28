@@ -45,11 +45,11 @@ func post(c *gin.Context, object interface{}) {
 
 	c.ShouldBindJSON(&object)
 
-	if err := db.Create(object).Error; err != nil {
+	if res := db.Create(object); res.Error != nil {
 		c.SecureJSON(400, gin.H{
 			"code": 400,
 			"message": "Bad request",
-			"errors": err,
+			"errors": res.GetErrors(),
 		})
 	} else{
 		c.JSON(201, gin.H{
@@ -65,7 +65,7 @@ func put(c *gin.Context, object interface{}) {
 
 	uuid := c.Param("uuid")
 	c.ShouldBindJSON(&object)
-	
+
 	if err := db.Where("uuid = ?", uuid).First(&object).Error; err != nil {
 		c.SecureJSON(400, gin.H{
 			"code": 400,
@@ -84,7 +84,7 @@ func put(c *gin.Context, object interface{}) {
 func delete(c *gin.Context, object interface{}) {
 
 	uuid := c.Param("uuid")
-	
+
 	if err := db.Where("uuid = ?", uuid).Delete(object).Error; err != nil {
 		c.SecureJSON(400, gin.H{
 			"code": 400,

@@ -1,9 +1,10 @@
 package model
 
 import (
+	"time"
+
 	"github.com/satori/go.uuid"
 	"github.com/jinzhu/gorm"
-	"time"
 )
 
 // Survey : the survey struct definition

@@ -7,7 +7,8 @@ import (
 // IP : the ip struct definition
 type IP struct {
 	gorm.Model
-	Address  string    	`json:"ip"`
+	Address  string    	`gorm:"primary_key"json:"ip"`
+	Attempt  int 				`json:"attempt"`
 }
 
 // TableName : Gorm

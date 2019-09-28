@@ -8,6 +8,7 @@ require (
 	github.com/apaxa-go/eval v0.0.0-20171223182326-1d18b251d679 // indirect
 	github.com/apaxa-go/helper v0.0.0-20180607175117-61d31b1c31c3 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20190424111038-f61b66f89f4a
+	github.com/bearbin/go-age v0.0.0-20140407072555-316d0c1e7cd1
 	github.com/biezhi/gorm-paginator/pagination v0.0.0-20190124091837-7a5c8ed20334
 	github.com/dchest/safefile v0.0.0-20151022103144-855e8d98f185 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
