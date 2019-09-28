@@ -7,7 +7,6 @@ require (
 	github.com/Jeffail/gabs v1.4.0
 	github.com/apaxa-go/eval v0.0.0-20171223182326-1d18b251d679 // indirect
 	github.com/apaxa-go/helper v0.0.0-20180607175117-61d31b1c31c3 // indirect
-	github.com/appleboy/gin-jwt/v2 v2.6.2
 	github.com/asaskevich/govalidator v0.0.0-20190424111038-f61b66f89f4a
 	github.com/biezhi/gorm-paginator/pagination v0.0.0-20190124091837-7a5c8ed20334
 	github.com/dchest/safefile v0.0.0-20151022103144-855e8d98f185 // indirect
@@ -23,7 +22,6 @@ require (
 	github.com/pkg/errors v0.8.1 // indirect
 	github.com/qor/validations v0.0.0-20171228122639-f364bca61b46
 	github.com/satori/go.uuid v1.2.0
-	github.com/stretchr/testify v1.3.0
 	golang.org/x/crypto v0.0.0-20190325154230-a5d413f7728c
 	golang.org/x/lint v0.0.0-20190909230951-414d861bb4ac // indirect
 	golang.org/x/sys v0.0.0-20190920190810-ef0ce1748380 // indirect

@@ -1,5 +1,7 @@
 # Awesome Golang API [Project](https://github.com/ritoon/cours/blob/esgi/project/README.md)
 
+[Try the demo version](https://awesome-go-vote.herokuapp.com/)
+
 Developers :
 - [MATI Audric](https://github.com/odrik)
 - [VARVEROPOULOS Valentin](https://github.com/firenaik)
@@ -36,6 +38,7 @@ You can run static analysis of the base code with :
 -  [gabs](github.com/Jeffail/gabs)
 -  [gin-jwt](github.com/appleboy/gin-jwt/v2)
 -  [govalidator](github.com/asaskevich/govalidator)
+-  [godotenv](github.com/joho/godotenv)
 -  [pagination](github.com/biezhi/gorm-paginator/pagination)
 -  [gin](github.com/gin-gonic/gin)
 -  [gorm](github.com/jinzhu/gorm)
@@ -43,6 +46,8 @@ You can run static analysis of the base code with :
 -  [crypto](golang.org/x/crypto)
 
 ## Documentation
+
+A postman collection is available in the doc/ folder
 
 ### GET /users
 
