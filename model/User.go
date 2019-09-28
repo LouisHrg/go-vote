@@ -14,7 +14,7 @@ type User struct {
   Firstname   string    `valid:"stringlength(2|15)"json:"firstname"`
   Lastname    string    `valid:"stringlength(2|15)"json:"lastname"`
   Accesslevel int       `valid:"required,range(1|2)"json:"access_level"`
-  Dateofbirth time.Time `valid:"required,range(1|2)"json:"date_of_birth"`
+  Dateofbirth time.Time `valid:"required"json:"date_of_birth"`
   Password    string    `json:"password,omitempty"`
 }
 
@@ -26,7 +26,6 @@ func (u *User) TableName() string {
 
 // BeforeCreate : Gorm hook
 func (u *User) BeforeCreate(scope *gorm.Scope) {
-  scope.SetColumn("Dateofbirth", hashPassword(u.Password))
   scope.SetColumn("Password", hashPassword(u.Password))
   scope.SetColumn("UUID", uuid.NewV4().String())
   return

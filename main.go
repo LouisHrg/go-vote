@@ -12,10 +12,17 @@ import (
 	"github.com/go-vote/handler"
 	"github.com/asaskevich/govalidator"
 
+	"github.com/joho/godotenv"
 )
 
 func init() {
-	var port = "8080"
+
+	err := godotenv.Load()
+	if err != nil {
+	  log.Fatal("Error loading .env file")
+	}
+
+	var port = os.Getenv("PORT")
 	if len(port) == 0 {
 		log.Panic("no given port")
 	}
@@ -33,13 +40,13 @@ func main() {
 
 	gin.DefaultWriter = io.MultiWriter(f)
 
-	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
+
+	r.Use(gin.Logger())
 
 	r.Use(middleware.IPFirewall())
 
 	r.POST("/login", middleware.LoginHandler)
-
   r.GET("/", handler.BasicResponse)
 
 	auth := r.Group("/")
@@ -47,17 +54,22 @@ func main() {
 	{
 		auth.GET("/users", handler.GetUsers)
 		auth.GET("/users/:uuid", handler.GetUser)
-		auth.POST("/users", handler.PostUser)
-		auth.DELETE("/users/:uuid", handler.DeleteUser)
-		auth.PUT("/users/:uuid", handler.PutUser)
-
-		auth.PATCH("/users/:uuid/promote", handler.PromoteUser)
 
 		auth.GET("/surveys", handler.GetSurveys)
 		auth.GET("/surveys/:uuid", handler.GetSurvey)
 		auth.POST("/surveys", handler.PostSurvey)
-	}
 
+		// Admin only protected routes
+		admin := auth.Group("/")
+		admin.Use(middleware.ACLCheck)
+
+		admin.POST("/users", handler.PostUser)
+		admin.PUT("/users/:uuid", handler.PutUser)
+
+		admin.DELETE("/users/:uuid", handler.DeleteUser)
+		admin.PATCH("/users/:uuid/promote", handler.PromoteUser)
+
+	}
 
 	r.Run()
 }

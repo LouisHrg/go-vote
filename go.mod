@@ -16,6 +16,7 @@ require (
 	github.com/google/shlex v0.0.0-20181106134648-c34317bd91bf // indirect
 	github.com/hashicorp/go-version v1.2.0 // indirect
 	github.com/jinzhu/gorm v1.9.10
+	github.com/joho/godotenv v1.3.0
 	github.com/kardianos/govendor v1.0.9 // indirect
 	github.com/liip/sheriff v0.0.0-20190308094614-91aa83a45a3d // indirect
 	github.com/mgechev/revive v0.0.0-20190916193410-596ef107bb70 // indirect

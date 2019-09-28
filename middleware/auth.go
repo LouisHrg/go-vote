@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"os"
 	"net/http"
 	"errors"
 	"time"
@@ -46,7 +47,7 @@ func LoginHandler(c *gin.Context) {
 
 	var user Result
 
-	// Workaround to get around the hook and get the password
+	// Workaround to get around the gorm hook and get the password
 	if !db.Table("users").Select("email, password, uuid, accesslevel").Where("email = ?", loginParams.Username).Scan(&user).RecordNotFound() {
 
 	if model.CheckPasswordHash(loginParams.Password, user.Password) {
@@ -57,7 +58,7 @@ func LoginHandler(c *gin.Context) {
 			"time":  time.Now().Unix(),
 		})
 
-		tokenStr, err := token.SignedString([]byte("supersaucysecret"))
+		tokenStr, err := token.SignedString([]byte(os.Getenv("SECRET")))
 
 		if err != nil {
 			c.JSON(500, UnsignedResponse{
@@ -75,18 +76,18 @@ func LoginHandler(c *gin.Context) {
 	}
 
 	c.JSON(400, UnsignedResponse{
-		Message: "bad username",
+		Message: "Invalid username or/and password",
 	})
 }
 
 func extractBearerToken(header string) (string, error) {
 	if header == "" {
-		return "", errors.New("bad header value given")
+		return "", errors.New("Invalid header value given")
 	}
 
 	jwtToken := strings.Split(header, " ")
 	if len(jwtToken) != 2 {
-		return "", errors.New("incorrectly formatted authorization header")
+		return "", errors.New("Incorrectly formatted authorization header")
 	}
 
 	return jwtToken[1], nil
@@ -97,11 +98,11 @@ func parseToken(jwtToken string) (*jwt.Token, error) {
 		if _, OK := token.Method.(*jwt.SigningMethodHMAC); !OK {
 			return nil, errors.New("bad signed method received")
 		}
-		return []byte("supersaucysecret"), nil
+		return []byte(os.Getenv("SECRET")), nil
 	})
 
 	if err != nil {
-		return nil, errors.New("bad jwt token")
+		return nil, errors.New("Invalid JWT token")
 	}
 
 	return token, nil
@@ -120,7 +121,7 @@ func JwtTokenCheck(c *gin.Context) {
 
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, UnsignedResponse{
-			Message: "bad jwt token",
+			Message: "Invalid jwt token",
 		})
 		return
 	}
@@ -128,7 +129,7 @@ func JwtTokenCheck(c *gin.Context) {
 	Claims, OK := token.Claims.(jwt.MapClaims)
 	if !OK {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, UnsignedResponse{
-			Message: "unable to parse claims",
+			Message: "Unable to parse claims",
 		})
 		return
 	}
@@ -138,7 +139,7 @@ func JwtTokenCheck(c *gin.Context) {
 	// The token expire after 30 minutes
 	if (tokenTime + 1800) < float64(time.Now().Unix()) {
 		c.AbortWithStatusJSON(403, UnsignedResponse{
-			Message: "token has expired",
+			Message: "Token has expired",
 		})
 		return
 	}
@@ -146,7 +147,8 @@ func JwtTokenCheck(c *gin.Context) {
 	c.Next()
 }
 
-func privateACLCheck(c *gin.Context) {
+// ACLCheck : Check if the user is admin or not
+func ACLCheck(c *gin.Context) {
 	jwtToken, err := extractBearerToken(c.GetHeader("Authorization"))
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, UnsignedResponse{
@@ -156,33 +158,37 @@ func privateACLCheck(c *gin.Context) {
 	}
 
 	token, err := parseToken(jwtToken)
+
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, UnsignedResponse{
-			Message: "bad jwt token",
+			Message: "Invalid jwt token",
 		})
 		return
 	}
 
-	claims, OK := token.Claims.(jwt.MapClaims)
+	Claims, OK := token.Claims.(jwt.MapClaims)
 	if !OK {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, UnsignedResponse{
-			Message: "unable to parse claims",
+			Message: "Unable to parse claims",
 		})
 		return
 	}
 
-	claimedUID, OK := claims["user"].(string)
-	if !OK {
-		c.AbortWithStatusJSON(http.StatusBadRequest, UnsignedResponse{
-			Message: "no user property in claims",
+	var tokenTime = Claims["time"].(float64)
+
+	// The token expire after 30 minutes
+	if (tokenTime + 1800) < float64(time.Now().Unix()) {
+		c.AbortWithStatusJSON(403, UnsignedResponse{
+			Message: "Token has expired",
 		})
 		return
 	}
 
-	uid := c.Param("uid")
-	if claimedUID != uid {
-		c.AbortWithStatusJSON(http.StatusBadRequest, UnsignedResponse{
-			Message: "token uid does not match resource uid",
+	var acl = Claims["acl"].(string)
+
+	if acl != "1" {
+		c.AbortWithStatusJSON(403, UnsignedResponse{
+			Message: "You are not authorized to perform this action",
 		})
 		return
 	}
