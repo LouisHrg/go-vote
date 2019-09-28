@@ -46,4 +46,31 @@ func DeleteUser(c *gin.Context) {
 	delete(c, &user)
 }
 
+// PromoteUser : promote user ACL
+func PromoteUser(c *gin.Context) {
 
+	var user model.User
+
+	uuid := c.Param("uuid")
+
+	if err := db.Set("gorm:auto_preload", true).Where("uuid = ?", uuid).First(&user).Error; err != nil {
+		c.JSON(404, gin.H{
+			"code": 404,
+			"message": "Ressource not found",
+		})
+	} else {
+
+		if user.Accesslevel == 1 {
+			user.Accesslevel = 2
+		} else {
+			user.Accesslevel = 1
+		}
+
+		db.Save(&user)
+
+		c.JSON(200, gin.H{
+			"code": 200,
+			"data": user,
+		})
+	}
+}

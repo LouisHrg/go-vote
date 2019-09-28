@@ -1,5 +1,8 @@
 run:
-	@ rm test.db && go build && ./go-vote
+	@ go build && ./go-vote
+
+start: reset-db run
+	@ echo "starting go app"
 
 analysis:
 	@ $$GOPATH/bin/revive handler model provider
@@ -10,9 +13,6 @@ install-dep:
 
 install-go-vendor:
 	@ go get -u github.com/kardianos/govendor
-
-start:
-	@ ./go-vote
 
 reset-db:
 	@ rm test.db

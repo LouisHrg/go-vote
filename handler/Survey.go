@@ -21,3 +21,13 @@ func GetSurvey(c *gin.Context) {
 
 	get(c, &survey)
 }
+
+// PostSurvey : create a new user
+func PostSurvey(c *gin.Context) {
+
+	var survey model.Survey
+
+	post(c, &survey)
+}
+
+
