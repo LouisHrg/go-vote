@@ -11,11 +11,28 @@
 				{
 					"name": "POST users ",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2wiOjEsInRpbWUiOjE1Njk1OTYzNzYsInV1aWQiOiI3OWJiMjNmMi0zNGMyLTQyYjktOWFkZC04YThmMDUwZjFiN2IifQ.yvAYmlMPvnOF-wdR6VqMv6b5jU-Uz5vr_vXMeNPZkT8",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n    \"email\": \"test@gma2il.com\",\n    \"password\": \"test\"\n}"
 						},
 						"url": {
 							"raw": "{{baseURL}}/users",
@@ -60,17 +77,17 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{baseURL}}/users/:id",
+							"raw": "{{baseURL}}/users/:uuid",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"users",
-								":id"
+								":uuid"
 							],
 							"variable": [
 								{
-									"key": "id",
+									"key": "uuid",
 									"value": ""
 								}
 							]
@@ -88,17 +105,17 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{baseURL}}/users/:id",
+							"raw": "{{baseURL}}/users/:uuid",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"users",
-								":id"
+								":uuid"
 							],
 							"variable": [
 								{
-									"key": "id",
+									"key": "uuid",
 									"value": ""
 								}
 							]
@@ -116,17 +133,46 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{baseURL}}/users/:id",
+							"raw": "{{baseURL}}/users/:uuid",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"users",
-								":id"
+								":uuid"
 							],
 							"variable": [
 								{
-									"key": "id",
+									"key": "uuid",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Promote user",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseURL}}/users/:uuid/promote",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								":uuid",
+								"promote"
+							],
+							"variable": [
+								{
+									"key": "uuid",
 									"value": ""
 								}
 							]
@@ -149,7 +195,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": ""
+							"raw": "{{baseURL}}/surveys",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"surveys"
+							]
 						}
 					},
 					"response": []
@@ -164,17 +216,17 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{baseURL}}/surveys/:id",
+							"raw": "{{baseURL}}/surveys/:uuid",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"surveys",
-								":id"
+								":uuid"
 							],
 							"variable": [
 								{
-									"key": "id",
+									"key": "uuid",
 									"value": ""
 								}
 							]
@@ -213,12 +265,19 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{baseURL}}/surveys",
+							"raw": "{{baseURL}}/surveys/:uuid",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"surveys"
+								"surveys",
+								":uuid"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -234,17 +293,17 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{baseURL}}/surveys/:id",
+							"raw": "{{baseURL}}/surveys/:uuid",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"surveys",
-								":id"
+								":uuid"
 							],
 							"variable": [
 								{
-									"key": "id",
+									"key": "uuid",
 									"value": ""
 								}
 							]
@@ -267,17 +326,17 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{baseURL}}/responses/:id",
+							"raw": "{{baseURL}}/responses/:uuid",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"responses",
-								":id"
+								":uuid"
 							],
 							"variable": [
 								{
-									"key": "id",
+									"key": "uuid",
 									"value": ""
 								}
 							]
@@ -286,26 +345,26 @@
 					"response": []
 				},
 				{
-					"name": "PUT response",
+					"name": "POST  response",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{baseURL}}/responses/:id",
+							"raw": "{{baseURL}}/responses/:uuid",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"responses",
-								":id"
+								":uuid"
 							],
 							"variable": [
 								{
-									"key": "id",
+									"key": "uuid",
 									"value": ""
 								}
 							]
@@ -314,6 +373,34 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "LOGIN",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"admin@admin.com\",\n\t\"password\": \"admin\"\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/login",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -340,7 +427,7 @@
 	],
 	"variable": [
 		{
-			"id": "8030716d-b204-4fb4-8607-34a9152cc5f1",
+			"id": "b80cd13d-dd2a-4297-9f59-383cc94cd173",
 			"key": "baseURL",
 			"value": "http://localhost:8080",
 			"type": "string"
