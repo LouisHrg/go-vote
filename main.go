@@ -5,13 +5,10 @@ import (
 	"os"
 	"io"
 
-
-	"github.com/gin-gonic/gin"
-	"github.com/go-vote/middleware"
-
-	"github.com/go-vote/handler"
 	"github.com/asaskevich/govalidator"
-
+	"github.com/gin-gonic/gin"
+	"github.com/go-vote/handler"
+	"github.com/go-vote/middleware"
 	"github.com/joho/godotenv"
 )
 
@@ -28,17 +25,21 @@ func init() {
 	}
 }
 
-func main() {
+// Init libs, loggerS...
+func initLibs() {
 
-	r := gin.Default()
+	f, _ := os.Create("gin.log")
+	gin.DefaultWriter = io.MultiWriter(f)
 
 	gin.DisableConsoleColor()
 
 	govalidator.SetFieldsRequiredByDefault(false)
 
-	f, _ := os.Create("gin.log")
+}
 
-	gin.DefaultWriter = io.MultiWriter(f)
+func initRouter() *gin.Engine {
+
+	r := gin.Default()
 
 	r.Use(gin.Recovery())
 
@@ -70,6 +71,13 @@ func main() {
 		admin.PATCH("/users/:uuid/promote", handler.PromoteUser)
 
 	}
+
+	return r
+}
+
+func main() {
+
+	r := initRouter()
 
 	r.Run()
 }

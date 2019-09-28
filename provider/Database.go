@@ -1,13 +1,12 @@
 package provider
 
 import (
-	"github.com/jinzhu/gorm"
-	"github.com/qor/validations"
-	// I don't know this is the way the documentation is
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"github.com/biezhi/gorm-paginator/pagination"
 	"github.com/go-vote/model"
-	"time"
+	"github.com/jinzhu/gorm"
+	// I don't know this is the way the documentation is
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	"github.com/qor/validations"
 )
 
 var db *gorm.DB
@@ -33,44 +32,7 @@ func init() {
 	 	&model.IP{},
 	)
 
-	input := "2018-10-01"
-	layout := "2006-01-02"
-	start, _ := time.Parse(layout, input)
-
-	input = "2020-10-01"
-	layout = "2006-01-02"
-	end, _ := time.Parse(layout, input)
-
-	var newSurvey = &model.Survey{
-		Title: "Propreté des trottoirs",
-		Desc: "Dans le budget qui sera soumis au vote des conseillers de Paris lundi, 32 M€ seront consacrés à l’achat de nouvelles machines, plus silencieuses, plus propres et plus performantes. Il n’y aura pas d’embauche d’agents supplémentaires.",
-		StartDate: start,
-		EndDate: end,
-	}
-
-	db.Create(&newSurvey)
-	db.Create(&model.Response{Survey: *newSurvey, Message: "Eclatax javax"})
-	db.Create(&model.Response{Survey: *newSurvey, Message: "Eclatax .net"})
-
-	input = "1996-02-08"
-	layout = "2006-01-02"
-	t, _ := time.Parse(layout, input)
-
-	db.Create(&model.User{
-		Email:     "admin@admin.com",
-		Firstname: "Jean",
-		Lastname:  "Admin",
-		Accesslevel:       1,
-		Dateofbirth:	t,
-		Password:  "admin"})
-
-	db.Create(&model.User{
-		Email:     "test@test.com",
-		Firstname: "Test",
-		Lastname:  "Test",
-		Accesslevel:       2,
-		Dateofbirth:	t,
-		Password:  "secret"})
+	loadFixtures()
 }
 
 // GetDB : getter of the instance of the database
