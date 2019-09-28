@@ -19,10 +19,10 @@ func init() {
 
 	err := godotenv.Load()
 	if err != nil {
-	  log.Fatal("Error loading .env file")
+	  log.Printf("Error loading .env file")
 	}
 
-	var port = os.Getenv("PORT")
+	var port = "8080"
 	if len(port) == 0 {
 		log.Panic("no given port")
 	}
