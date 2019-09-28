@@ -237,11 +237,28 @@
 				{
 					"name": "POST survey",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2wiOiIxIiwidGltZSI6MTU2OTY5NzY5NiwidXVpZCI6IjFkNWE2NjIxLTgyYzYtNDBmZC05MGJjLWQ0ZDRjZDBiYTIwOSJ9.nmutdxIwCtDjBxYK2m1CkCeLg-1wRiZC6EUkb6xfIZE",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n    \"title\": \"Loi 232a24\",\n    \"desc\": \"New description.\",\n    \"startDate\": \"2019-10-01T00:00:00Z\",\n    \"endDate\": \"2020-10-01T00:00:00Z\",\n    \"Responses\": [\n        {\n            \"message\": \"Yes please\"\n        },\n        {\n            \"message\": \"No please\"\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "{{baseURL}}/surveys",
@@ -427,7 +444,7 @@
 	],
 	"variable": [
 		{
-			"id": "b80cd13d-dd2a-4297-9f59-383cc94cd173",
+			"id": "9cdc694d-1a0d-4c37-8714-16afafa7772f",
 			"key": "baseURL",
 			"value": "http://localhost:8080",
 			"type": "string"
