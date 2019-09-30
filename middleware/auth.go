@@ -63,6 +63,7 @@ func LoginHandler(c *gin.Context) {
 			return
 		}
 
+
 		c.JSON(200, SignedResponse{
 			Jwt:   tokenStr,
 		})
@@ -145,6 +146,8 @@ func JwtTokenCheck(c *gin.Context) {
 		return
 	}
 
+	c.Set("uuid", Claims["uuid"].(string))
+
 	c.Next()
 }
 
@@ -171,16 +174,6 @@ func ACLCheck(c *gin.Context) {
 	if !OK {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, UnsignedResponse{
 			Message: "Unable to parse claims",
-		})
-		return
-	}
-
-	var tokenTime = Claims["time"].(float64)
-
-	// The token expire after 30 minutes
-	if (tokenTime + 1800) < float64(time.Now().Unix()) {
-		c.AbortWithStatusJSON(403, UnsignedResponse{
-			Message: "Token has expired",
 		})
 		return
 	}

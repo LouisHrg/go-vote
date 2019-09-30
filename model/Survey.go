@@ -28,9 +28,8 @@ func (s *Survey) BeforeCreate(scope *gorm.Scope) {
 	return
 }
 
-// AfterFind : Gorm hook
-func (s *Survey) AfterFind() (err error) {
-	s.ID = 0
-	return
+// AfterDelete : Gorm Hook
+func (s *Survey) AfterDelete(tx *gorm.DB) (err error) {
+ 	tx.Model(&Response{}).Where("survey_id = ?", s.ID).Update("deleted_at", time.Now())
+  return
 }
-

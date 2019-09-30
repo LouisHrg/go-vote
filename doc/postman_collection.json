@@ -10,17 +10,19 @@
 			"item": [
 				{
 					"name": "POST users ",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "781fe843-1513-4ca1-884b-18d51e5c4507",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2wiOjEsInRpbWUiOjE1Njk1OTYzNzYsInV1aWQiOiI3OWJiMjNmMi0zNGMyLTQyYjktOWFkZC04YThmMDUwZjFiN2IifQ.yvAYmlMPvnOF-wdR6VqMv6b5jU-Uz5vr_vXMeNPZkT8",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -48,6 +50,42 @@
 				},
 				{
 					"name": "GET users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c8ddddf7-88ba-4524-8e98-ae32e7ddb89f",
+								"exec": [
+									"const baseURL = pm.variables.get(\"baseURL\");",
+									"",
+									"const echoPostRequest = {",
+									"  url: `${baseURL}/login`,",
+									"  method: 'POST',",
+									"  header: 'Content-Type:application/json',",
+									"  body: {",
+									"    mode: 'application/json',",
+									"    raw: JSON.stringify(",
+									"        {",
+									"          email:'',",
+									"          password:'',",
+									"        })",
+									"  }",
+									"};",
+									"",
+									"pm.sendRequest(echoPostRequest, function (err, res) {",
+									"console.log(err ? err : res.json());",
+									"    if (err === null) {",
+									"        console.log('Saving the token and expiry date')",
+									"        var responseJson = res.json();",
+									"        pm.environment.set('accessToken', responseJson.token)",
+									"    }",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -69,6 +107,42 @@
 				},
 				{
 					"name": "GET user ",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "6ee5b253-e3ef-4a34-88b9-e92561063e0b",
+								"exec": [
+									"const baseURL = pm.environment.get(\"baseUrl\");",
+									"",
+									"const echoPostRequest = {",
+									"  url: `${baseURL}/login`,",
+									"  method: 'POST',",
+									"  header: 'Content-Type:application/json',",
+									"  body: {",
+									"    mode: 'application/json',",
+									"    raw: JSON.stringify(",
+									"        {",
+									"          email:'',",
+									"          password:'',",
+									"        })",
+									"  }",
+									"};",
+									"",
+									"pm.sendRequest(echoPostRequest, function (err, res) {",
+									"console.log(err ? err : res.json());",
+									"    if (err === null) {",
+									"        console.log('Saving the token and expiry date')",
+									"        var responseJson = res.json();",
+									"        pm.environment.set('accessToken', responseJson.token)",
+									"    }",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -97,6 +171,18 @@
 				},
 				{
 					"name": "DELETE user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5d81edf7-58e8-4e71-8c1b-4b83abb04436",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -124,13 +210,32 @@
 					"response": []
 				},
 				{
-					"name": "PUT user",
+					"name": "PATCH user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ad183d3a-9c46-4c13-acf8-c5a8a5fd7a1d",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"method": "PUT",
-						"header": [],
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/javascript"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n\t\"firstname\": \"Gros\",\n\t\"lastname\": \"Test\"\n}"
 						},
 						"url": {
 							"raw": "{{baseURL}}/users/:uuid",
@@ -144,7 +249,7 @@
 							"variable": [
 								{
 									"key": "uuid",
-									"value": ""
+									"value": "b6f8e059-4584-4b4d-a9f5-4d068950dc6c"
 								}
 							]
 						}
@@ -152,7 +257,19 @@
 					"response": []
 				},
 				{
-					"name": "PUT Promote user",
+					"name": "PATCH Promote user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "dc602e8e-a898-43ee-912e-62d284a3eac1",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -187,6 +304,18 @@
 			"item": [
 				{
 					"name": "GET surveys",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "aa7f13cb-159d-4c31-a7c4-5d39c7700be3",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -208,6 +337,18 @@
 				},
 				{
 					"name": "GET survey",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "6bb35495-66ab-4931-a34d-6c93b7a90999",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -236,17 +377,19 @@
 				},
 				{
 					"name": "POST survey",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "6d15d96c-66fc-4eb5-af19-8c42b8368a80",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2wiOiIxIiwidGltZSI6MTU2OTY5NzY5NiwidXVpZCI6IjFkNWE2NjIxLTgyYzYtNDBmZC05MGJjLWQ0ZDRjZDBiYTIwOSJ9.nmutdxIwCtDjBxYK2m1CkCeLg-1wRiZC6EUkb6xfIZE",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -388,12 +531,128 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "PATCH response",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/javascript"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"message\": \"Oui je suis ok pour ça oui\",\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/responses/d3f05088-a845-4a8f-a7b1-db1405384eff",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"responses",
+								"d3f05088-a845-4a8f-a7b1-db1405384eff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH vote",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/javascript"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseURL}}/responses/:uuid/vote",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"responses",
+								":uuid",
+								"vote"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "d3f05088-a845-4a8f-a7b1-db1405384eff"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE vote",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/javascript"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseURL}}/responses/:uuid/vote",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"responses",
+								":uuid",
+								"vote"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "d3f05088-a845-4a8f-a7b1-db1405384eff"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "LOGIN",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2f3a237c-85ff-47e6-9bc7-8eff73ce5233",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -405,7 +664,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\": \"admin@admin.com\",\n\t\"password\": \"admin\"\n}"
+					"raw": "{\n\t\"email\": \"admin@admin.com\",\n\t\"password\": \"admin\"\n}\n\n\n"
 				},
 				"url": {
 					"raw": "{{baseURL}}/login",
@@ -420,6 +679,16 @@
 			"response": []
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{accessToken}}",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
@@ -427,6 +696,32 @@
 				"id": "54b623ca-ea5d-4d9a-a391-8b3ecbdc8450",
 				"type": "text/javascript",
 				"exec": [
+					"const baseURL = pm.variables.get(\"baseURL\");",
+					"",
+					"",
+					"",
+					"const echoPostRequest = {",
+					"  url: `${baseURL}/login`,",
+					"  method: 'POST',",
+					"  header: 'Content-Type:application/json',",
+					"  body: {",
+					"    mode: 'application/json',",
+					"    raw: JSON.stringify(",
+					"        {",
+					"          email:'admin@admin.com',",
+					"          password:'admin',",
+					"        })",
+					"  }",
+					"};",
+					"",
+					"pm.sendRequest(echoPostRequest, function (err, res) {",
+					"console.log(err ? err : res.json());",
+					"    if (err === null) {",
+					"        console.log('Saving the token and expiry date')",
+					"        var responseJson = res.json();",
+					"        pm.environment.set('accessToken', responseJson.token)",
+					"    }",
+					"});",
 					""
 				]
 			}
@@ -444,7 +739,7 @@
 	],
 	"variable": [
 		{
-			"id": "9cdc694d-1a0d-4c37-8714-16afafa7772f",
+			"id": "abb3730f-4771-48a5-be8c-90e9bab69d61",
 			"key": "baseURL",
 			"value": "http://localhost:8080",
 			"type": "string"

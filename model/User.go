@@ -13,11 +13,11 @@ import (
 // User : the user struct definition
 type User struct {
   Abstract              `sql:"embedded;prefix:-"`
-  Email       string    `valid:"email"gorm:"type:varchar(100);unique_index"json:"email"`
-  Firstname   string    `valid:"stringlength(2|15),alphanum"json:"firstname"`
-  Lastname    string    `valid:"stringlength(2|15),alphanum"json:"lastname"`
-  Accesslevel int       `valid:"required,range(1|2)"json:"access_level"`
-  Dateofbirth time.Time `valid:"required"json:"date_of_birth"`
+  Email       string    `valid:"email"gorm:"type:varchar(100);unique_index"json:"email,omitempty"`
+  Firstname   string    `valid:"stringlength(2|15),alphanum"json:"firstname,omitempty"`
+  Lastname    string    `valid:"stringlength(2|15),alphanum"json:"lastname,omitempty"`
+  Accesslevel int       `valid:"required,range(1|2)"json:"access_level,omitempty"`
+  Dateofbirth time.Time `valid:"required"json:"date_of_birth,omitempty"`
   Password    string    `json:"password,omitempty"`
 }
 
