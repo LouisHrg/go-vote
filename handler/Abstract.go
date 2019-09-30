@@ -60,13 +60,16 @@ func post(c *gin.Context, object interface{}) {
 	}
 }
 
-// put
-func put(c *gin.Context, object interface{}) {
+// patch
+func patch(c *gin.Context, object interface{}, patchStruct interface{}) {
 
 	uuid := c.Param("uuid")
-	c.ShouldBindJSON(&object)
 
-	if err := db.Where("uuid = ?", uuid).First(&object).Error; err != nil {
+	c.ShouldBindJSON(&patchStruct)
+
+	db.Model(object).Where("uuid = ?", uuid).Find(object)
+
+	if err := db.Model(object).UpdateColumns(patchStruct).Error; err != nil {
 		c.SecureJSON(400, gin.H{
 			"code": 400,
 			"message": "Bad request",
@@ -85,7 +88,9 @@ func delete(c *gin.Context, object interface{}) {
 
 	uuid := c.Param("uuid")
 
-	if err := db.Where("uuid = ?", uuid).Delete(object).Error; err != nil {
+	db.Where("uuid = ?", uuid).First(object)
+
+	if err := db.Delete(object).Error; err != nil {
 		c.SecureJSON(400, gin.H{
 			"code": 400,
 			"message": "Bad request",

@@ -56,20 +56,26 @@ func initRouter() *gin.Engine {
 		auth.GET("/users", handler.GetUsers)
 		auth.GET("/users/:uuid", handler.GetUser)
 
+		auth.PATCH("/responses/:uuid/vote", handler.Vote)
+		auth.DELETE("/responses/:uuid/vote", handler.DeleteVote)
+
 		auth.GET("/surveys", handler.GetSurveys)
 		auth.GET("/surveys/:uuid", handler.GetSurvey)
 		auth.POST("/surveys", handler.PostSurvey)
+
+		auth.PATCH("/responses/:uuid", handler.PatchResponse)
 
 		// Admin only protected routes
 		admin := auth.Group("/")
 		admin.Use(middleware.ACLCheck)
 
 		admin.POST("/users", handler.PostUser)
-		admin.PUT("/users/:uuid", handler.PutUser)
+		admin.PATCH("/users/:uuid", handler.PatchUser)
 
 		admin.DELETE("/users/:uuid", handler.DeleteUser)
 		admin.PATCH("/users/:uuid/promote", handler.PromoteUser)
 
+		admin.DELETE("/surveys/:uuid", handler.DeleteSurvey)
 	}
 
 	return r

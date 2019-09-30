@@ -30,12 +30,13 @@ func PostUser(c *gin.Context) {
 	post(c, &user)
 }
 
-// PutUser : update an user
-func PutUser(c *gin.Context) {
+// PatchUser : update an user
+func PatchUser(c *gin.Context) {
 
 	var user model.User
+	var patchStruct model.User
 
-	put(c, &user)
+	patch(c, &user, &patchStruct)
 }
 
 // DeleteUser : delete an user
