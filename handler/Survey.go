@@ -41,7 +41,7 @@ func PatchResponse(c *gin.Context) {
 	patch(c, &response, &responsePatch)
 }
 
-// Vote : Add user to response
+// Vote : Add user to the response ressource
 func Vote(c *gin.Context) {
 
 	var response model.Response
@@ -67,7 +67,7 @@ func Vote(c *gin.Context) {
 	}
 }
 
-// Vote : Add user to response
+// DeleteVote : Remove user from the response ressource
 func DeleteVote(c *gin.Context) {
 
   var response model.Response

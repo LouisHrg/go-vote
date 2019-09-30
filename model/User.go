@@ -27,16 +27,16 @@ func (u *User) TableName() string {
 }
 
 // Validate : custom validation rules
-func (user User) Validate(db *gorm.DB) {
-  if age.Age(user.Dateofbirth) < 18 {
-    db.AddError(validations.NewError(user, "Age", "User needs to be 18+"))
+func (u User) Validate(db *gorm.DB) {
+  if age.Age(u.Dateofbirth) < 18 {
+    db.AddError(validations.NewError(u, "Age", "User needs to be 18+"))
   }
 
   r := User{}
-  _ = db.Where("email = ?", user.Email).First(&r)
+  _ = db.Where("email = ?", u.Email).First(&r)
 
-  if r.Email == user.Email {
-    db.AddError(validations.NewError(user, "Email", "User with this email already exist"))
+  if r.Email == u.Email {
+    db.AddError(validations.NewError(u, "Email", "User with this email already exist"))
   }
 }
 
