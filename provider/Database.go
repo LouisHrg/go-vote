@@ -32,7 +32,8 @@ func init() {
 	 	&model.IP{},
 	)
 
-	//loadFixtures()
+	// Load all the fixtures
+	loadFixtures()
 }
 
 // GetDB : getter of the instance of the database

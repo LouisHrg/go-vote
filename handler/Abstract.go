@@ -17,9 +17,9 @@ func getAll(c *gin.Context, objects interface{}) {
 	page, _ := strconv.Atoi(c.DefaultQuery("page", pageDefault))
 	limit, _ := strconv.Atoi(c.DefaultQuery("limit", limitDefault))
 
-	usersCol := provider.GetAll(objects, page, limit)
+	objectCol := provider.GetAll(objects, page, limit)
 
-	c.JSON(200, usersCol)
+	c.JSON(200, objectCol)
 }
 
 // get : Take an object an a gin context and respond the ressource with uuid requested in route

@@ -22,6 +22,22 @@ func GetUser(c *gin.Context) {
 	get(c, &user)
 }
 
+// GetCurrentUser : get current user info
+func GetCurrentUser(c *gin.Context) {
+	var user model.User
+
+ 	uuid, _ := c.Get("uuid")
+
+	if err := db.Set("gorm:auto_preload", true).Where("uuid = ?", uuid).First(&user).Error; err != nil {
+		c.JSON(404, gin.H{
+			"code": 404,
+			"message": "Ressource not found",
+		})
+	} else {
+		c.JSON(200, user)
+	}
+}
+
 // PostUser : create a new user
 func PostUser(c *gin.Context) {
 

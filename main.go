@@ -56,6 +56,8 @@ func initRouter() *gin.Engine {
 		auth.GET("/users", handler.GetUsers)
 		auth.GET("/users/:uuid", handler.GetUser)
 
+		auth.GET("/login/me", handler.GetCurrentUser)
+
 		auth.PATCH("/responses/:uuid/vote", handler.Vote)
 		auth.DELETE("/responses/:uuid/vote", handler.DeleteVote)
 
