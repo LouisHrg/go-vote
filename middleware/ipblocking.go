@@ -13,7 +13,7 @@ func IPFirewall() gin.HandlerFunc {
     var db = provider.GetDB()
     var blocked model.IP
     return func(c *gin.Context) {
-        if !db.Where("address = ? AND attempt >= ?", c.ClientIP(), 3).Find(&blocked).RecordNotFound() {
+        if !db.Where("address = ? AND attempt >= ?", c.ClientIP(), 30000).Find(&blocked).RecordNotFound() {
             c.AbortWithStatusJSON(http.StatusForbidden, gin.H{
                 "status":  http.StatusForbidden,
                 "message": "Permission denied",
