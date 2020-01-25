@@ -13,7 +13,7 @@ require (
 	github.com/dchest/safefile v0.0.0-20151022103144-855e8d98f185 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.4.0
-	github.com/google/shlex v0.0.0-20181106134648-c34317bd91bf // indirect
+	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510 // indirect
 	github.com/hashicorp/go-version v1.2.0 // indirect
 	github.com/jinzhu/gorm v1.9.10
 	github.com/joho/godotenv v1.3.0
@@ -25,6 +25,7 @@ require (
 	github.com/satori/go.uuid v1.2.0
 	golang.org/x/crypto v0.0.0-20190325154230-a5d413f7728c
 	golang.org/x/lint v0.0.0-20190909230951-414d861bb4ac // indirect
-	golang.org/x/sys v0.0.0-20190920190810-ef0ce1748380 // indirect
-	golang.org/x/tools v0.0.0-20190920225731-5eefd052ad72 // indirect
+	golang.org/x/sys v0.0.0-20191206220618-eeba5f6aabab // indirect
+	golang.org/x/tools v0.0.0-20191206204035-259af5ff87bd // indirect
+	gopkg.in/yaml.v2 v2.2.7 // indirect
 )

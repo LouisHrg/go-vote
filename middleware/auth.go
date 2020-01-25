@@ -36,6 +36,8 @@ func LoginHandler(c *gin.Context) {
 
 	type Result struct {
 	  Email 			string
+	  Firstname 			string
+	  Lastname 			string
 	  UUID 				string
 	  Accesslevel string
 	  Password  	string
@@ -44,12 +46,14 @@ func LoginHandler(c *gin.Context) {
 	var user Result
 
 	// Workaround to get around the gorm hook and get the password
-	if !db.Table("users").Select("email, password, uuid, accesslevel").Where("email = ?", loginParams.Username).Scan(&user).RecordNotFound() {
+	if !db.Table("users").Select("email, password, uuid, firstname, lastname, accesslevel").Where("email = ?", loginParams.Username).Scan(&user).RecordNotFound() {
 
 	if model.CheckPasswordHash(loginParams.Password, user.Password) {
 
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 			"uuid": user.UUID,
+			"firstname": user.Firstname,
+			"lastname": user.Lastname,
 			"acl": user.Accesslevel,
 			"time":  time.Now().Unix(),
 		})
