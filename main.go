@@ -48,7 +48,7 @@ func initRouter() *gin.Engine {
 	r.Use(middleware.IPFirewall())
 
 	r.POST("/login", middleware.LoginHandler)
-  r.GET("/", handler.BasicResponse)
+    r.GET("/", handler.BasicResponse)
 
 	auth := r.Group("/")
 	auth.Use(middleware.JwtTokenCheck)

@@ -23,8 +23,9 @@ require (
 	github.com/pkg/errors v0.8.1 // indirect
 	github.com/qor/validations v0.0.0-20171228122639-f364bca61b46
 	github.com/satori/go.uuid v1.2.0
+	github.com/stretchr/testify v1.3.0
 	golang.org/x/crypto v0.0.0-20190325154230-a5d413f7728c
 	golang.org/x/lint v0.0.0-20190909230951-414d861bb4ac // indirect
-	golang.org/x/sys v0.0.0-20190920190810-ef0ce1748380 // indirect
-	golang.org/x/tools v0.0.0-20190920225731-5eefd052ad72 // indirect
+	golang.org/x/sys v0.0.0-20190927073244-c990c680b611 // indirect
+	golang.org/x/tools v0.0.0-20190929041059-e7abfedfabcf // indirect
 )
