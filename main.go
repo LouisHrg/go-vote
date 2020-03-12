@@ -68,7 +68,7 @@ func initRouter() *gin.Engine {
 
 	r.POST("/login", middleware.LoginHandler)
     r.GET("/", handler.BasicResponse)
-
+	r.POST("/users", handler.PostUser)
 	auth := r.Group("/")
 	auth.Use(middleware.JwtTokenCheck)
 	{
@@ -90,7 +90,7 @@ func initRouter() *gin.Engine {
 		admin := auth.Group("/")
 		admin.Use(middleware.ACLCheck)
 
-		admin.POST("/users", handler.PostUser)
+		
 		admin.PATCH("/users/:uuid", handler.PatchUser)
 
 		admin.DELETE("/users/:uuid", handler.DeleteUser)

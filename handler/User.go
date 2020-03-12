@@ -42,7 +42,7 @@ func GetCurrentUser(c *gin.Context) {
 func PostUser(c *gin.Context) {
 
 	var user model.User
-
+	user.Accesslevel = 2
 	post(c, &user)
 }
 

@@ -17,8 +17,8 @@ type User struct {
   Firstname   string    `valid:"stringlength(2|15),alphanum"json:"firstname,omitempty"`
   Lastname    string    `valid:"stringlength(2|15),alphanum"json:"lastname,omitempty"`
   Accesslevel int       `valid:"required,range(1|2)"json:"access_level,omitempty"`
-  Dateofbirth time.Time `valid:"required"json:"date_of_birth,omitempty"`
-  Avatar      string    `valid:"required"json:"avatar,omitempty"`
+  Dateofbirth time.Time `json:"date_of_birth,omitempty"`
+  Avatar      string    `json:"avatar,omitempty"`
   Bio         string    `valid:"required"json:"bio,omitempty"`
   Password    string    `json:"password,omitempty"`
 }
